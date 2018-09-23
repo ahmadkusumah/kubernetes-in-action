@@ -6,7 +6,13 @@ Kubernetes in Action :
 simple way:
 brew update
 brew install kubectl
-brew cask install minikube docker docker-compose vertualbox
+brew cask install minikube docker vertualbox
+
+## use this enviroment to use minikube docker environment
+eval $(minikube docker-env)
+
+## to revert to default docker env use the following command
+eval $(docker-machine env -u)
 
 ### KUbernetes
 Part 1 PODS:
@@ -31,3 +37,25 @@ creating POD:
        env: prod
 6. show pods with label
    - kubectl get po --show-labels
+7. Filtering resource by label
+   - kubectl get <<pods/nodes>> -l label_key=label_value
+8. Creating namespace
+   - kubectl create namespace <<new_namespace>>
+9. Creating namespace through yml
+   apiVersion: v1
+   kind: Namespace
+   metadata:
+     name: <<namespace new name>>
+
+   invoke above yml using :
+     - kubectl create -f custom_namespace.yml
+10. deleting resources
+   - delete by name
+     - kubectl delete pods <pod_name>
+     - kubectl delete service <svc_name>
+   - delete by label
+     - kubectl delete pods -l <label_key>=<label_value>
+   - delete by namespace
+     - kubectl delete pods -n <name_space>
+   - delete everything <quite dangerous>
+     - kubectl delete all --all
