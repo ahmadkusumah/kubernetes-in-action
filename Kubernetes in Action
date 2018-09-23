@@ -1,0 +1,33 @@
+Kubernetes in Action :
+- Basic Docker
+- Installing Minikube -> running kubernetes locally -> single node cluster
+- Installing kubernetes client (kubectl)
+
+simple way:
+brew update
+brew install kubectl
+brew cask install minikube docker docker-compose vertualbox
+
+### KUbernetes
+Part 1 PODS:
+creating POD:
+1. create pods from yaml file :
+   - kubectl create -f file_name.yml
+2. see yaml/ json output from existing pod
+   - kubectl get po <<pod_name>> -o <<yaml/json>>
+3. see logs:
+   - kubectl logs <<pod_name>>
+   - if pods contain multiple container, we need to spicipy container name:
+     - kubectl logs <<pod_name>> -c <<container_name>>
+4. Sending request to pod:
+   - setting up service, with type=LoadBalancer
+   - Using port Forwarding
+     kubectl port-forward <<pod_name>> host_port:pod_port -> effectively to debug a pod
+5. Organizng pod can be done through labels in pod metadata file
+   metadata:
+     name: <pod_name>
+     labels:
+       creation_method: manual
+       env: prod
+6. show pods with label
+   - kubectl get po --show-labels
